@@ -1,0 +1,17 @@
+{
+  "name": "ALIVERSE — Mohd Ali Pathan",
+  "short_name": "ALIVERSE",
+  "description": "A universe built by imagination, engineering and code. The immersive 3D portfolio of Mohd Ali Pathan.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050706",
+  "theme_color": "#050706",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

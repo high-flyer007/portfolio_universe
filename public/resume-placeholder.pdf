@@ -1,0 +1,82 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+6 0 obj
+<< /Length 4283 >>
+stream
+0.02 0.03 0.025 rg 0 812 595 30 re f
+0.17 0.89 0.61 rg 0 810 595 2 re f
+BT /F2 7 Tf 0.17 0.89 0.61 rg 1 0 0 1 48 822 Tm (ALIVERSE  /  PORTFOLIO RESUME) Tj ET
+BT /F2 7 Tf 0.62 0.70 0.66 rg 1 0 0 1 380 822 Tm (PLACEHOLDER DOCUMENT) Tj ET
+BT /F1 30 Tf 0.08 0.10 0.09 rg 1 0 0 1 48 752 Tm (MOHD ALI PATHAN) Tj ET
+BT /F2 9 Tf 0.09 0.55 0.36 rg 1 0 0 1 48 734 Tm (COMPUTER ENGINEERING  /  FULL-STACK DEVELOPMENT  /  AI  /  CYBERSECURITY) Tj ET
+0.80 0.84 0.82 RG 0.7 w 48 722 m 547 722 l S
+BT /F2 8 Tf 0.38 0.44 0.41 rg 1 0 0 1 48 702 Tm (m.alipathan2905@gmail.com   ∑   github.com/high-flyer007   ∑   linkedin.com/in/mohd-ali-shakir-pathan-473913327) Tj ET
+0.17 0.89 0.61 rg 48 673 18 1.4 re f
+BT /F1 11 Tf 0.08 0.10 0.09 rg 1 0 0 1 56 664 Tm (PROFILE) Tj ET
+BT /F2 9 Tf 0.08 0.10 0.09 rg 1 0 0 1 48 640 Tm (Computer Engineering student at Ajeenkya DY Patil School of Engineering \(SPPU, expected 2028\), building) Tj ET
+BT /F2 9 Tf 0.08 0.10 0.09 rg 1 0 0 1 48 625 Tm (full-stack products, AI applications, cybersecurity tooling and interactive 3D experiences.) Tj ET
+0.17 0.89 0.61 rg 48 610 18 1.4 re f
+BT /F1 11 Tf 0.08 0.10 0.09 rg 1 0 0 1 56 601 Tm (EDUCATION) Tj ET
+BT /F2 9 Tf 0.08 0.10 0.09 rg 1 0 0 1 48 577 Tm (B.E. Computer Engineering ó Ajeenkya DY Patil School of Engineering, Savitribai Phule Pune University) Tj ET
+BT /F2 9 Tf 0.38 0.44 0.41 rg 1 0 0 1 48 562 Tm (Expected graduation: 2028    ∑    Reported CGPA: 9.55    ∑    First-year college topper) Tj ET
+BT /F2 9 Tf 0.38 0.44 0.41 rg 1 0 0 1 48 548 Tm (Class 10: 94.6%) Tj ET
+0.17 0.89 0.61 rg 48 531 18 1.4 re f
+BT /F1 11 Tf 0.08 0.10 0.09 rg 1 0 0 1 56 522 Tm (AREAS OF WORK) Tj ET
+BT /F2 9 Tf 0.08 0.10 0.09 rg 1 0 0 1 48 498 Tm (∑  Full-stack development ó React, Next.js, Vite, Tailwind CSS, Node.js, Express, FastAPI, Flask) Tj ET
+BT /F2 9 Tf 0.08 0.10 0.09 rg 1 0 0 1 48 483 Tm (∑  Data ó PostgreSQL, Supabase, Firebase, MongoDB, SQLite, Convex) Tj ET
+BT /F2 9 Tf 0.08 0.10 0.09 rg 1 0 0 1 48 468 Tm (∑  AI ó Gemini API, LLM integrations and applied AI product development) Tj ET
+BT /F2 9 Tf 0.08 0.10 0.09 rg 1 0 0 1 48 453 Tm (∑  Security ó telemetry ingestion, normalization, provenance and forensic workflows \(LogX\)) Tj ET
+0.17 0.89 0.61 rg 48 437 18 1.4 re f
+BT /F1 11 Tf 0.08 0.10 0.09 rg 1 0 0 1 56 428 Tm (SELECTED PROJECTS) Tj ET
+BT /F2 8 Tf 0.09 0.55 0.36 rg 1 0 0 1 48 404 Tm (LOGX) Tj ET
+BT /F2 9 Tf 0.08 0.10 0.09 rg 1 0 0 1 132 404 Tm (Universal security telemetry pre-processing and forensic intelligence platform.) Tj ET
+BT /F2 8 Tf 0.09 0.55 0.36 rg 1 0 0 1 48 387 Tm (SATYASCAN) Tj ET
+BT /F2 9 Tf 0.08 0.10 0.09 rg 1 0 0 1 132 387 Tm (AI-assisted Legal Metrology compliance inspection for packaged commodities.) Tj ET
+BT /F2 8 Tf 0.09 0.55 0.36 rg 1 0 0 1 48 370 Tm (STUDYLENS AI) Tj ET
+BT /F2 9 Tf 0.08 0.10 0.09 rg 1 0 0 1 132 370 Tm (AI study assistant for PDFs, summaries, quizzes and document questions.) Tj ET
+BT /F2 8 Tf 0.09 0.55 0.36 rg 1 0 0 1 48 353 Tm (SHADOW BLADE) Tj ET
+BT /F2 9 Tf 0.08 0.10 0.09 rg 1 0 0 1 132 353 Tm (Interactive browser-based 3D game built with React, Three.js and Convex.) Tj ET
+0.17 0.89 0.61 rg 48 339 18 1.4 re f
+BT /F1 11 Tf 0.08 0.10 0.09 rg 1 0 0 1 56 330 Tm (LEADERSHIP & ACTIVITY) Tj ET
+BT /F2 9 Tf 0.08 0.10 0.09 rg 1 0 0 1 48 306 Tm (∑  Vice Chair, IEEE Student Branch) Tj ET
+BT /F2 9 Tf 0.08 0.10 0.09 rg 1 0 0 1 48 291 Tm (∑  Co-founder of a sponsored startup) Tj ET
+BT /F2 9 Tf 0.08 0.10 0.09 rg 1 0 0 1 48 276 Tm (∑  Smart India Hackathon team leader) Tj ET
+BT /F2 9 Tf 0.08 0.10 0.09 rg 1 0 0 1 48 261 Tm (∑  Freelance development experience  ∑  Debate team participation) Tj ET
+0.17 0.89 0.61 rg 48 245 18 1.4 re f
+BT /F1 11 Tf 0.08 0.10 0.09 rg 1 0 0 1 56 236 Tm (BEYOND THE SCREEN) Tj ET
+BT /F2 9 Tf 0.08 0.10 0.09 rg 1 0 0 1 48 212 Tm (Chess  ∑  MMA  ∑  Cricket  ∑  Hip-hop  ∑  Trekking  ∑  Travelling) Tj ET
+0.80 0.84 0.82 RG 0.6 w 48 194 m 547 194 l S
+BT /F2 7 Tf 0.38 0.44 0.41 rg 1 0 0 1 48 186 Tm (This PDF is an editable placeholder generated for the ALIVERSE build. Replace public/resume-placeholder.pdf) Tj ET
+BT /F2 7 Tf 0.38 0.44 0.41 rg 1 0 0 1 48 174 Tm (with the real resume before publishing.) Tj ET
+BT /F2 7 Tf 0.62 0.70 0.66 rg 1 0 0 1 48 40 Tm (ALIVERSE  /  A UNIVERSE BUILT BY IMAGINATION, ENGINEERING AND CODE.) Tj ET
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000121 00000 n 
+0000000257 00000 n 
+0000000359 00000 n 
+0000000456 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+4791
+%%EOF
