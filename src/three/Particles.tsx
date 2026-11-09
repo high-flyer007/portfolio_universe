@@ -1,5 +1,5 @@
 import { useFrame } from "@react-three/fiber";
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 
 /**
@@ -15,6 +15,8 @@ export function ParticleField({
 }) {
   const group = useRef<THREE.Points>(null);
   const dust = useRef<THREE.Points>(null);
+  const pointer = useRef({ x: 0, y: 0 });
+  const drift = useRef({ x: 0, y: 0 });
 
   const { positions, colors } = useMemo(() => {
     const total = reduced ? Math.min(count, 260) : count;
@@ -47,7 +49,32 @@ export function ParticleField({
     return pos;
   }, [reduced]);
 
-  useFrame(({ camera, clock }) => {
+  useEffect(() => {
+    if (reduced) return;
+    const onPointerMove = (event: PointerEvent) => {
+      pointer.current.x = (event.clientX / window.innerWidth) * 2 - 1;
+      pointer.current.y = -((event.clientY / window.innerHeight) * 2 - 1);
+    };
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+    return () => window.removeEventListener("pointermove", onPointerMove);
+  }, [reduced]);
+
+  useFrame(({ camera, clock }, delta) => {
+    // The dust reacts a beat behind the pointer, so the field feels alive
+    // without competing with the portal's own parallax.
+    drift.current.x = THREE.MathUtils.damp(
+      drift.current.x,
+      reduced ? 0 : pointer.current.x,
+      1.5,
+      delta,
+    );
+    drift.current.y = THREE.MathUtils.damp(
+      drift.current.y,
+      reduced ? 0 : pointer.current.y,
+      1.5,
+      delta,
+    );
+
     if (group.current) {
       group.current.position.copy(camera.position);
       if (!reduced) {
@@ -56,8 +83,13 @@ export function ParticleField({
       }
     }
     if (dust.current) {
-      dust.current.position.copy(camera.position);
-      dust.current.rotation.y = -clock.elapsedTime * 0.015;
+      dust.current.position.set(
+        camera.position.x + drift.current.x * 0.85,
+        camera.position.y + drift.current.y * 0.55,
+        camera.position.z,
+      );
+      dust.current.rotation.y =
+        -clock.elapsedTime * 0.015 + drift.current.x * 0.12;
     }
   });
 

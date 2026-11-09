@@ -1,11 +1,136 @@
-import { motion, useReducedMotion } from "framer-motion";
-import { ArrowDownRight, ArrowUpRight } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { ArrowDownRight, ArrowRight, ArrowUpRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { profile } from "@/data/profile";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-export function Awakening({ onEnter }: { onEnter: () => void }) {
-  const reduced = useReducedMotion();
+function RevealText({
+  text,
+  className,
+  delay = 0,
+  reduced,
+}: {
+  text: string;
+  className?: string;
+  delay?: number;
+  reduced: boolean;
+}) {
+  return (
+    <span aria-hidden="true" className={className}>
+      {Array.from(text).map((char, index) => (
+        <motion.span
+          key={`${char}-${index}`}
+          initial={
+            reduced ? false : { y: "112%", opacity: 0, rotate: 2.5 }
+          }
+          animate={{ y: "0%", opacity: 1, rotate: 0 }}
+          transition={{
+            duration: 1.05,
+            delay: delay + index * 0.038,
+            ease: EASE,
+          }}
+          className="inline-block will-change-transform"
+        >
+          {char === " " ? "\u00A0" : char}
+        </motion.span>
+      ))}
+    </span>
+  );
+}
+
+/** A brief portal flare that carries the eye from the hero into the Origin. */
+function PortalTransition() {
+  return (
+    <motion.div
+      className="fixed inset-0 z-[65] flex items-center justify-center overflow-hidden"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.35 }}
+      aria-hidden="true"
+    >
+      <motion.div
+        className="absolute inset-0 bg-[#050706]"
+        initial={{ opacity: 0.3 }}
+        animate={{ opacity: [0.3, 0.86, 0.86, 0.15] }}
+        transition={{
+          duration: 1.45,
+          times: [0, 0.35, 0.7, 1],
+          ease: "easeInOut",
+        }}
+      />
+      <motion.div
+        className="absolute inset-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: [0, 0.85, 0] }}
+        transition={{ duration: 1.2, times: [0, 0.35, 1] }}
+      >
+        <span className="absolute left-1/2 top-1/2 h-px w-[120vw] -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-transparent via-emerald/60 to-transparent" />
+        <span className="absolute left-1/2 top-1/2 size-[68vmin] -translate-x-1/2 -translate-y-1/2 rounded-full border border-emerald/20" />
+      </motion.div>
+
+      {[0, 1, 2].map((index) => (
+        <motion.span
+          key={index}
+          className="absolute size-[34vmin] rounded-full border border-emerald/55"
+          initial={{ scale: 0.2, opacity: 0.85 }}
+          animate={{ scale: 8 + index * 3, opacity: 0 }}
+          transition={{
+            duration: 1.35,
+            delay: 0.1 + index * 0.1,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+        />
+      ))}
+
+      <motion.div
+        className="relative text-center"
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: [0, 1, 1, 0], y: [8, 0, -4, -10] }}
+        transition={{
+          duration: 1.35,
+          times: [0, 0.25, 0.7, 1],
+          ease: "easeInOut",
+        }}
+      >
+        <p className="label-mono text-emerald/70">Entering the universe</p>
+        <p className="mt-3 font-display text-2xl font-medium tracking-[0.16em] text-foreground sm:text-3xl">
+          02 / ORIGIN
+        </p>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+export function Awakening({
+  onEnter,
+  onViewProjects,
+}: {
+  onEnter: () => void;
+  onViewProjects: () => void;
+}) {
+  const reduced = Boolean(useReducedMotion());
+  const [entering, setEntering] = useState(false);
+  const timers = useRef<number[]>([]);
+
+  useEffect(
+    () => () => {
+      timers.current.forEach((timer) => window.clearTimeout(timer));
+    },
+    [],
+  );
+
+  const enter = () => {
+    if (entering) return;
+    if (reduced) {
+      onEnter();
+      return;
+    }
+    setEntering(true);
+    timers.current.push(window.setTimeout(onEnter, 560));
+    timers.current.push(window.setTimeout(() => setEntering(false), 1500));
+  };
 
   return (
     <section
@@ -13,7 +138,8 @@ export function Awakening({ onEnter }: { onEnter: () => void }) {
       aria-label="ALIVERSE — introduction"
       className="relative flex min-h-[100svh] flex-col justify-between overflow-hidden px-5 pb-7 pt-24 sm:px-8 sm:pb-9 lg:px-12"
     >
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-[#050706] via-[#050706]/70 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[58%] bg-gradient-to-t from-[#050706] via-[#050706]/72 to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(95%_75%_at_16%_62%,rgba(5,7,6,0.8),rgba(5,7,6,0.42)_46%,transparent_76%)]" />
 
       <div className="relative mx-auto flex w-full max-w-[1600px] items-start justify-between gap-6">
         <motion.p
@@ -30,7 +156,7 @@ export function Awakening({ onEnter }: { onEnter: () => void }) {
           initial={reduced ? false : { opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.3, ease: EASE }}
-          className="flex items-center gap-3"
+          className="flex shrink-0 items-center gap-3"
         >
           <span className="size-1.5 animate-pulse rounded-full bg-emerald" />
           <span className="label-mono text-muted-foreground">
@@ -39,79 +165,105 @@ export function Awakening({ onEnter }: { onEnter: () => void }) {
         </motion.div>
       </div>
 
-      <div className="relative mx-auto flex w-full max-w-[1600px] flex-1 items-end pb-10 pt-12 sm:pt-[22vh] lg:pb-16 lg:pt-[28vh]">
+      <div className="relative mx-auto flex w-full max-w-[1600px] flex-1 flex-col justify-end pb-8 pt-14 sm:pb-10 sm:pt-16 lg:pb-14">
         <div className="w-full">
-          <h1 className="select-none">
-            <span className="block overflow-hidden">
-              <motion.span
-                initial={reduced ? false : { y: "105%" }}
-                animate={{ y: 0 }}
-                transition={{ duration: 1.15, delay: 0.35, ease: EASE }}
-                className="block font-display text-[clamp(3.6rem,13.5vw,12.5rem)] font-medium leading-[0.8] tracking-[-0.055em] text-foreground"
-              >
-                MOHD ALI
-              </motion.span>
+          <motion.div
+            initial={reduced ? false : { opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.32, ease: EASE }}
+            className="mb-4 flex items-center gap-4 sm:mb-5"
+          >
+            <span className="h-px w-10 bg-emerald/60" />
+            <span className="label-mono text-[9px] text-emerald/80">
+              Portfolio / Vol. 01
             </span>
-            <span className="mt-1 flex flex-wrap items-end gap-x-6 gap-y-2 sm:mt-2">
-              <span className="overflow-hidden">
-                <motion.span
-                  initial={reduced ? false : { y: "105%" }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 1.15, delay: 0.5, ease: EASE }}
-                  className="block font-display text-[clamp(3.6rem,13.5vw,12.5rem)] font-medium leading-[0.8] tracking-[-0.055em] text-outline"
-                >
-                  PATHAN
-                </motion.span>
-              </span>
-              <motion.span
-                aria-hidden="true"
-                initial={reduced ? false : { opacity: 0, scale: 0.4 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.9, delay: 1.1, ease: EASE }}
-                className="mb-[0.6em] hidden size-3 rounded-full bg-emerald shadow-[0_0_28px_rgba(43,227,155,0.9)] sm:block lg:size-4"
+            <span className="hidden label-mono text-[9px] text-muted-foreground/50 sm:block">
+              Selected systems &amp; experiments
+            </span>
+          </motion.div>
+
+          <h1 aria-label="Mohd Ali Pathan" className="select-none">
+            <span className="block overflow-hidden pb-[0.04em]">
+              <RevealText
+                text="MOHD ALI"
+                delay={0.38}
+                reduced={reduced}
+                className="block font-display text-[clamp(3.2rem,12.6vw,11.8rem)] font-medium leading-[0.8] tracking-[-0.055em] text-[#eef8f2] drop-shadow-[0_0_60px_rgba(43,227,155,0.07)]"
               />
-              <motion.span
+            </span>
+
+            <span className="mt-1 flex flex-col gap-4 sm:mt-2 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+              <span className="block overflow-hidden pb-[0.05em]">
+                <RevealText
+                  text="PATHAN"
+                  delay={0.58}
+                  reduced={reduced}
+                  className="text-outline block font-display text-[clamp(3.2rem,12.6vw,11.8rem)] font-medium leading-[0.8] tracking-[-0.055em]"
+                />
+              </span>
+
+              <motion.div
                 initial={reduced ? false : { opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.95, ease: EASE }}
-                className="mb-[0.9em] max-w-[13rem] font-serif text-lg italic leading-snug text-emerald sm:text-xl lg:ml-auto lg:max-w-[15rem] lg:text-2xl"
+                className="mb-1 max-w-[17rem] shrink-0 border-l border-emerald/30 pl-4 sm:pl-5 lg:mb-[0.9em] lg:max-w-[18rem] lg:border-l-0 lg:border-r lg:pl-0 lg:pr-5 lg:text-right"
               >
-                Building beyond the ordinary.
-              </motion.span>
+                <p className="label-mono text-[9px] text-emerald/90 sm:text-[10px]">
+                  {profile.tagline}
+                </p>
+                <span className="mt-3 block h-px w-10 bg-gradient-to-r from-emerald/50 to-transparent lg:ml-auto" />
+                <p className="mt-3 font-serif text-xl italic leading-tight text-[#dcebe3] sm:text-2xl lg:text-[1.65rem]">
+                  {profile.role}
+                </p>
+              </motion.div>
             </span>
           </h1>
 
           <motion.div
             initial={reduced ? false : { opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.15, ease: EASE }}
-            className="mt-8 flex flex-col justify-between gap-7 border-t border-white/[0.09] pt-6 sm:flex-row sm:items-end lg:mt-10"
+            transition={{ duration: 1, delay: 1.12, ease: EASE }}
+            className="mt-7 grid gap-6 border-t border-white/[0.09] pt-6 sm:mt-9 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-14"
           >
             <div>
-              <p className="max-w-md text-sm leading-relaxed text-muted-foreground sm:text-[15px]">
-                Engineer. Builder. Innovator. I turn ambitious ideas into
-                working digital products — AI applications, security platforms
-                and interactive software experiences.
+              <p className="max-w-xl text-sm leading-relaxed text-[#a7bbb0] sm:text-[15px]">
+                {profile.heroStatement}
               </p>
               <p className="label-mono mt-4 text-[9px] text-muted-foreground/70">
                 {profile.metadata}
               </p>
             </div>
 
-            <div className="flex flex-col items-start gap-4 sm:items-end">
-              <button
-                type="button"
-                onClick={onEnter}
-                className="group flex items-center gap-3 rounded-full border border-emerald/40 bg-emerald/[0.07] px-5 py-3 text-[10px] font-medium uppercase tracking-[0.2em] text-emerald transition-all duration-300 hover:border-emerald hover:bg-emerald hover:text-[#03130c]"
-              >
-                Enter the universe
-                <ArrowDownRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
-              </button>
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-wrap items-center gap-3">
+                <button
+                  type="button"
+                  onClick={enter}
+                  disabled={entering}
+                  className="group relative flex min-h-11 items-center gap-3 overflow-hidden rounded-full border border-emerald/45 bg-emerald/[0.08] px-5 py-3 text-[10px] font-medium uppercase tracking-[0.2em] text-emerald transition-all duration-300 hover:border-emerald hover:bg-emerald hover:text-[#03130c] disabled:opacity-70"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full"
+                  />
+                  <span className="relative">Enter the universe</span>
+                  <ArrowDownRight className="relative size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={onViewProjects}
+                  className="group flex min-h-11 items-center gap-2 rounded-full border border-white/15 px-5 py-3 text-[10px] font-medium uppercase tracking-[0.2em] text-[#dbe9e1] transition-all duration-300 hover:border-emerald/55 hover:text-emerald"
+                >
+                  View projects
+                  <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                </button>
+              </div>
+
               <a
                 href={profile.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-1.5 text-[10px] uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:text-foreground"
+                className="group flex w-fit items-center gap-1.5 text-[10px] uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:text-foreground"
               >
                 github.com/{profile.githubHandle}
                 <ArrowUpRight className="size-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -137,6 +289,8 @@ export function Awakening({ onEnter }: { onEnter: () => void }) {
           18.5204° N / 73.8567° E
         </p>
       </div>
+
+      <AnimatePresence>{entering && <PortalTransition />}</AnimatePresence>
     </section>
   );
 }

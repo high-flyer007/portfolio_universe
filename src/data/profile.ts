@@ -10,6 +10,8 @@ export const profile = {
   lastName: "Pathan",
   wordmark: "ALIVERSE",
   tagline: "Building beyond the ordinary.",
+  heroStatement:
+    "I turn ambitious ideas into working digital products — AI applications, security platforms and interactive experiences.",
   role: "Engineer. Builder. Innovator.",
   metadata: "COMPUTER ENGINEERING / FULL-STACK DEVELOPMENT / AI",
   location: "Pune, Maharashtra · India",

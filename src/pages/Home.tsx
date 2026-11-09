@@ -156,7 +156,10 @@ export default function Home() {
       <SiteNav activeScene={active} onNavigate={scrollTo} />
 
       <main id="main" tabIndex={-1} className="relative z-10 outline-none">
-        <Awakening onEnter={() => scrollTo("origin")} />
+        <Awakening
+          onEnter={() => scrollTo("origin")}
+          onViewProjects={() => scrollTo("projects")}
+        />
         <Origin />
         <ProjectUniverse
           focusIndex={focusProject}

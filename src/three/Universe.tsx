@@ -182,7 +182,7 @@ function DistantArchitecture() {
   );
 }
 
-function ContactMonument() {
+function ContactMonument({ reduced }: { reduced: boolean }) {
   const monument = useRef<THREE.Group>(null);
   useFrame(({ clock }) => {
     if (monument.current) {
@@ -192,7 +192,14 @@ function ContactMonument() {
 
   return (
     <group ref={monument} position={[0, 0, -183]}>
-      <Portal position={[0, 0.4, 0]} scale={1.42} shards={false} aura={0.9} />
+      <Portal
+        position={[0, 0.4, 0]}
+        scale={1.42}
+        shards={false}
+        aura={0.9}
+        reduced={reduced}
+        motes={reduced ? 40 : 110}
+      />
       <LightShaft
         color="#2be39b"
         height={30}
@@ -285,6 +292,8 @@ export function Universe({
           }
           scale={quality.mobile ? 0.78 : 1.06}
           aura={1}
+          reduced={quality.reduced}
+          motes={quality.tier === "low" ? 90 : 170}
         />
       )}
       {near(1) && <OriginInstallation />}
@@ -300,7 +309,7 @@ export function Universe({
       )}
       {near(4) && <JourneyPath />}
       {near(5) && <BeyondObjects compact={quality.mobile} />}
-      {near(6) && <ContactMonument />}
+      {near(6) && <ContactMonument reduced={quality.reduced} />}
     </Canvas>
   );
 }
